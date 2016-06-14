@@ -71,6 +71,8 @@ class RDDStreamingSpec
     }
     finally {
       ssc.stop(stopSparkContext = false, stopGracefully = true)
+      // this will rethrow any exceptions thrown during execution (from foreachRDD etc)
+      ssc.awaitTerminationOrTimeout(60 * 1000)
     }
   }
 
